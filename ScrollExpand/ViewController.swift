@@ -14,15 +14,15 @@ class ViewController: UIViewController {
 	@IBOutlet weak var theScrollView: UIScrollView!
 	
 	var curSub = 1
+	var nViews = 20
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		
-		var y = 10
+		var y = 10	// padding between views
 		
-		for i in 1...10 {
-			print("\(i)")
+		for i in 1...nViews {
 			
 			let v = UIView(frame: CGRect(x: 20, y: y, width: 200, height: 100))
 			v.backgroundColor = UIColor.redColor()
@@ -60,35 +60,39 @@ class ViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 
+	@IBAction func bTap10(sender: AnyObject) {
+		for _ in 1...nViews {
+			bTap(sender)
+		}
+	}
+	
 	@IBAction func bTap(sender: AnyObject) {
 		
 		let v = theScrollView.viewWithTag(curSub)
 		let v2 = v?.viewWithTag(102)
 
-		var r:CGRect = (v2?.frame)!
-		r.size.height += 43
-		v2?.frame = r
+		// increase the height of the "PostView"
+		v?.frame.size.height += 43
 		
-		r = (v?.frame)!
-		r.size.height += 43
-		v?.frame = r
+		// increase teh height of the "subsection" view
+		v2?.frame.size.height += 43
 		
-		for views in theScrollView.subviews {
+		// move all subsequent views down...
+		for aView in theScrollView.subviews {
 			
-			if views.tag > curSub {
-				var rr = views.frame
-				rr.origin.y += 43
-				views.frame = rr
+			if aView.tag > curSub {
+				aView.frame.origin.y += 43
 			}
 			
 		}
 		
-		if curSub < 10 {
-			curSub = curSub + 1
+		if curSub < nViews {
+			curSub += 1
 		} else {
 			curSub = 1
 		}
 
+		// increase the scrollView contentSize / height
 		theScrollView.contentSize.height += 43
 		
 	}
