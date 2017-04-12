@@ -13,6 +13,7 @@ class ViewController: UIViewController {
 	
 	@IBOutlet weak var theScrollView: UIScrollView!
 	
+	@IBOutlet weak var btnRight: UIButton!
 	var curSub = 1
 	var nViews = 20
 	
@@ -52,6 +53,13 @@ class ViewController: UIViewController {
 		}
 		
 		theScrollView.contentSize = CGSizeMake(theScrollView.frame.width, CGFloat(y))
+		
+		var img = UIImage(named: "btn.png")
+		
+		let myInsets : UIEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8)
+		img = img!.resizableImageWithCapInsets(myInsets)
+		
+		btnRight.setBackgroundImage(img, forState: UIControlState.Normal)
 		
 	}
 
